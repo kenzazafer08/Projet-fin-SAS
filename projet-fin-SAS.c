@@ -100,6 +100,9 @@ int main(int argc, char *argv[]) {
 				    searchcode(P,code,N);
                 		break;
                 	case 2 :
+                	printf("Entrer la qantite de produit que vous voulez chercher : ");
+				    scanf("%d",&quant);
+				    searchquant(P,quant,N);
                 		break;
 				}
 				break;

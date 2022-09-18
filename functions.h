@@ -14,7 +14,7 @@ typedef struct{
 	int prix;
     float pTTC;
 	int code;
-	char nom[10];
+	char *nom;
 }Produit;
 
 typedef struct{
@@ -28,11 +28,11 @@ Produit* saisieone(Produit *P,int N){
 		i=N-1; //pour ajouter le produit dans la dernier case
 		printf("\n\tEntrer les information du produit %d ! \n",i+1);	
 		//Lire les information du produit
-
+        P[i].nom=(char*)malloc(sizeof(char*));
 		printf("Code : ");
 		scanf("%d",&P[i].code);
 		printf("nom : ");
-		scanf("%s",P[i].nom);
+		scanf("%s",&P[i].nom);
 		printf("Prix : ");
 		scanf("%d",&P[i].prix);
 		printf("Quantité : ");
@@ -165,21 +165,26 @@ void searchcode(Produit *P,int code,int N){
 }}
 
 void searchquant(Produit *P,int quant,int N){
-    Produit PS;
+    Produit *PS;
 	int i,c=0;
+	int D=0;
 	for(i=0;i<N;i++){
 		if(P[i].Quant==quant){
+			D=D+1;
 			c=1;
-			PS = P[i];
+			PS[D-1] = P[i];
 	}	
 	if(c==0){
 		printf("Pas de poduit avec ce code !");
 		
 	}else{
-				    printf("\n\tProduit trouver ");
-                    printf("\nNom : %s",PS.nom);
-                    printf("\nPrix : %d",PS.prix);
-                    printf("\nPrix TTC: %.2f",PS.pTTC);
-                    printf("\nQuantité : %d",PS.Quant);
+	printf("\n\tProduits trouver ");
+		for(i=0;i<D;i++){	
+        printf("\nNom : %s",PS[i].nom);
+        printf("\nPrix : %d",PS[i].prix);
+        printf("\nPrix TTC: %.2f",PS[i].pTTC);
+        printf("\nCode : %d",PS[i].code);
+		}
+		
 	}
 }}
