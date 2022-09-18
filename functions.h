@@ -37,7 +37,7 @@ Produit* saisieone(Produit *P,int N){
 		scanf("%d",&P[i].prix);
 		printf("Quantité : ");
 		scanf("%d",&P[i].Quant);
-		P[i].pTTC=(P[i].prix*15)/100;
+		P[i].pTTC=P[i].prix +((P[i].prix*15)/100);
 		
 		printf("\n\tMerci ! \n");
 	return P;
