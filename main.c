@@ -10,7 +10,7 @@ void main() {
 	Produit *p;
 	Achat *A;
 	int N=0;
-	char code[10];
+	int code;
 	int quant;
 	int Total;
 	do {
@@ -81,7 +81,7 @@ void main() {
 				break;
 			case 4 :
 				printf("Entrer le code de produit que vous voulez acheter : ");
-				scanf("%s",code);
+				scanf("%d",&code);
                 printf("Enter la quantite que vous voulez acheter : ");
                 scanf("%d",&quant);
 				if(N==0){
@@ -106,7 +106,7 @@ void main() {
                 switch(Search){
                 	case 1 :
 						printf("Entrer le code de produit que vous voulez chercher : ");
-				        scanf("%s",code);
+				        scanf("%d",&code);
                         searchcode(p,nbr,code);
                 		break;
                 	case 2 :
@@ -128,14 +128,14 @@ void main() {
 				break;
 			case 7 :
 			    printf("Entrer le code de produit que vous voulez allimenter : ");
-				scanf("%s",code);
+				scanf("%d",&code);
                 printf("Enter la quantite : ");
                 scanf("%d",&quant);
 				p = alimenterstock(p,nbr,code,quant);
 				break;
 			case 8 :
 			    printf("Entrer le code de produit que vous voulez supprimer : ");
-				scanf("%s",code);
+				scanf("%d",&code);
 				p = supprimer(p,nbr,code);
 				free(&p[nbr-1]);
 				nbr--;

@@ -9,14 +9,14 @@ typedef struct{
 	int annee;
 }Date;
 typedef struct {
-   char code[10];
+   int code;
    int prix;
    int quant;
    float pTTC;
    char name[10];
 }Produit;
 typedef struct {
-    char code[10];
+    int code;
     int prix;
     int quant;
 	Date d;
@@ -42,20 +42,10 @@ Date today(){
       d.annee=an;
       return d;
 }
-int code(Produit *p,int nbr,char *code){
-    int i,c=0;
-    for(i=0;i<nbr;i++){
-        if(strcmp(p[i].code,code)==0){
-            return 1;
-        }
-    }return 0;
-}
 Produit* saisie(Produit *E,int tmp,int N){
     int i;
     for(i=tmp;i<N;i++){
      printf("\nProduit %d: \n",i+1);
-     printf("Code : ");
-     scanf("%s",E[i].code);
      printf("Nom : ");
      scanf("%s",E[i].name);
 	 printf("Prix : ");
@@ -63,14 +53,12 @@ Produit* saisie(Produit *E,int tmp,int N){
 	 printf("Quantite : ");
      scanf("%d",&E[i].quant);
      E[i].pTTC=pttc(E[i].prix);
-    
+     E[i].code= i+1;
     }return E;
 }
 Produit* saisieun(Produit *E,int N){
     int i=N-1;
      printf("\nProduit %d: \n",i+1);
-     printf("Code : ");
-     scanf("%s",E[i].code);
      printf("Nom : ");
      scanf("%s",E[i].name);
 	 printf("Prix : ");
@@ -78,6 +66,7 @@ Produit* saisieun(Produit *E,int N){
 	 printf("Quantite : ");
      scanf("%d",&E[i].quant);
      E[i].pTTC=pttc(E[i].prix);
+     E[i].code= i+1;
     return E;
 }
 Produit* triprix(Produit *tab,int N){
@@ -122,7 +111,7 @@ void affichage(Produit *P,int nbr,int T){
 	   }else P = triNOM(P,nbr);
     for(i=0;i<nbr;i++){
      printf("\n\tProduit %d: ",i+1);
-     printf("\nCode : %s",P[i].code);
+     printf("\nCode : %d",P[i].code);
      printf("\nNom : %s",P[i].name);
 	 printf("\nPrix : %d DH",P[i].prix);
 	 printf("\nQuantite : %d",P[i].quant);
@@ -130,10 +119,10 @@ void affichage(Produit *P,int nbr,int T){
        }
 	    
     }
-Produit* Achatp(Produit *P,int N,char *code,int quant){
+Produit* Achatp(Produit *P,int N,int code,int quant){
 	int i,c;
 	for(i=0;i<N;i++){
-		if(strcmp(P[i].code, code)==0){
+		if(P[i].code ==code){
 			c=1;
 			P[i].quant= P[i].quant - quant;
 		}
@@ -143,11 +132,11 @@ Produit* Achatp(Produit *P,int N,char *code,int quant){
 	}
 	return P;
 }
-Achat* PAchat(Produit *P,Achat *A,char *code,int N,int quant){
+Achat* PAchat(Produit *P,Achat *A,int code,int N,int quant){
 	int i,c=0,p,q;
     char *n;
 	for(i=0;i<N;i++){
-		if(strcmp(P[i].code, code)==0){
+		if(P[i].code ==code){
 			c=P[i].pTTC;
             n=P[i].name;
             p=P[i].prix * quant;
@@ -163,14 +152,14 @@ Achat* PAchat(Produit *P,Achat *A,char *code,int N,int quant){
 		i=N-1;
 		A[i].pTTC=c;
         A[i].prix=p;
-        code = strcpy(A[i].code,code);
+        A[i].code=code;
         n = strcpy(A[i].name,n);
 		A[i].d.jour=day;
 		A[i].d.mois=mois;
 		A[i].d.annee=an;
 		if(c!=0){
         printf("Produit acheter : ");
-        printf("\nCode : %s",code);
+        printf("\nCode : %d",A[i].code);
         printf("\nNom : %s",n);
 	    printf("\nPrix : %d DH",A[i].prix);
 	    printf("\nQuantite : %d",quant);
@@ -180,96 +169,63 @@ Achat* PAchat(Produit *P,Achat *A,char *code,int N,int quant){
 
 	return A;
 }
-void searchcode(Produit *P,int N,char *code){
-    int i,D=0,C=0;
-    Produit *PS;
+void searchcode(Produit *P,int N,int code){
+    int i,j=0,C=0;
     for(i=0;i<N;i++){
-        if(strcmp(P[i].code,code)==0){
+        if(P[i].code==code){
             C=C+1;
-            if(D==0){
-                D=D+1;
-                PS = malloc(D*sizeof(Produit));
-            }else {
-                D=D+1;
-                PS = realloc(PS,D*sizeof(Produit));
-            }
-            PS[i]=P[i];
+        
+            printf("\n\tProduit %d: ",j+1);
+            printf("\nCode : %d",P[i].code);
+            printf("\nNom : %s",P[i].name);
+	        printf("\nPrix : %d DH",P[i].prix);
+	        printf("\nQuantite : %d",P[i].quant);
+        j++;
         }
     }
     if(C==0){
         printf("\nAucun produit trouver ! ");
-    }else {
-        printf("\n\tLes produit trouver :  ");
-        for(i=0;i<D;i++){
-            printf("\n\tProduit %d: ",i+1);
-            printf("\nCode : %s",PS[i].code);
-            printf("\nNom : %s",PS[i].name);
-	        printf("\nPrix : %d DH",PS[i].prix);
-	        printf("\nQuantite : %d",PS[i].quant);
-        }
     }
-}
+       
+    }
+
 void searchquant(Produit *P,int N,int quant){
-    int i,D=0,C=0;
-    Produit *PS;
+    int i,j=0,C=0;
     for(i=0;i<N;i++){
         if(P[i].quant==quant){
             C=C+1;
-            if(D==0){
-                D=D+1;
-                PS = malloc(D*sizeof(Produit));
-            }else {
-                D=D+1;
-                PS = realloc(PS,D*sizeof(Produit));
-            }
-            PS[i]=P[i];
-        }
-    }
+            printf("\n\tProduit %d: ",j+1);
+            printf("\nCode : %d",P[i].code);
+            printf("\nNom : %s",P[i].name);
+	        printf("\nPrix : %d DH",P[i].prix);
+	        printf("\nQuantite : %d",P[i].quant);
+        
+    }}
     if(C==0){
         printf("\nAucun produit trouver ! ");
-    }else {
-        printf("\n\tLes produit trouver :  ");
-        for(i=0;i<D;i++){
-            printf("\n\tProduit %d: ",i+1);
-            printf("\nCode : %s",PS[i].code);
-            printf("\nNom : %s",PS[i].name);
-	        printf("\nPrix : %d DH",PS[i].prix);
-	        printf("\nQuantite : %d",PS[i].quant);
-        }
     }
-}
+    }
+
 void etatstock(Produit *P,int N){
-    int i,D=0,C=0;
-    Produit *PS;
+    int i,J=0,C=0;
     for(i=0;i<N;i++){
         if(P[i].quant < 3){
-            C=C+1;
-            if(D==0){
-                D=D+1;
-                PS = malloc(D*sizeof(Produit));
-            }else {
-                D=D+1;
-                PS = realloc(PS,D*sizeof(Produit));
-            }
-            PS[i]=P[i];
-        }
+        
+            printf("\n\tProduit %d: ",i+1);
+            printf("\nCode : %d",P[i].code);
+            printf("\nNom : %s",P[i].name);
+	        printf("\nPrix : %d DH",P[i].prix);
+	        printf("\nQuantite : %d",P[i].quant);
+J++;        }
     }
     if(C==0){
         printf("\nAucun produit ! ");
-    }else {
-        for(i=0;i<D;i++){
-            printf("\n\tProduit %d: ",i+1);
-            printf("\nCode : %s",PS[i].code);
-            printf("\nNom : %s",PS[i].name);
-	        printf("\nPrix : %d DH",PS[i].prix);
-	        printf("\nQuantite : %d",PS[i].quant);
-        }
     }
 }
-Produit* alimenterstock(Produit *P,int N,char *code,int quant){
+Produit* alimenterstock(Produit *P,int N,int code,int quant){
     int i,c=0;
     for(i=0;i<N;i++){
-        if(strcmp(P[i].code,code)==0){
+        if(P[i].code == code){
             c=c+1;
             P[i].quant=P[i].quant+quant;
         }if(c==0){
@@ -277,10 +233,10 @@ Produit* alimenterstock(Produit *P,int N,char *code,int quant){
         }else printf("\nDone !");
     }return P;
 }
-Produit* supprimer(Produit *P,int N,char *code){
+Produit* supprimer(Produit *P,int N,int code){
     int i,j,c=0;
     for(i=0;i<N;i++){
-        if(strcmp(P[i].code,code)==0){
+        if(P[i].code==code){
             c=c+1;
             for(j=i;j<N;j++){
                P[i]=P[i+1]; 
