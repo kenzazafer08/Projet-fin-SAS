@@ -180,6 +180,5 @@ void main() {
 				printf("\n\tChoix non valid !\n");
 				break;
 	}
-	}
-	while(choix!=0);
+	}while(choix!=0);
 }
