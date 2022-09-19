@@ -13,7 +13,6 @@ void main() {
 	char code[10];
 	int quant;
 	int Total;
-	float Moyenne;
 	do {
 		printf("\n\t---Menu principale---");
 		printf("\nPour inserer un nouveaux produit Entrer 1 : ");
@@ -59,8 +58,10 @@ void main() {
 				}
 				break;
 			case 3 :
+			    do{
 				printf("\nOrdre alphabetique croissant du nom 1 : ");
                 printf("\nOrdre decroissant du prix 2 : ");
+				printf("\nRevenir au menu principale 3: ");
                 printf("\nVotre choix : ");
                 scanf("%d",&Trie);
                 switch(Trie){
@@ -73,7 +74,8 @@ void main() {
                 	default :
 				        printf("\n\tChoix non valid !\n");
 			        	break;
-				}
+				}	
+				}while (Trie!=3);
 				break;
 			case 4 :
 				printf("Entrer le code de produit que vous voulez acheter : ");
@@ -93,8 +95,10 @@ void main() {
 		    	}
 				break;
 			case 5 :
-	            printf("\nChercher par code 1 : ");
+			    do{
+                printf("\nChercher par code 1 : ");
                 printf("\nChercher par quantite 2 : ");
+				printf("\nRevenir au menu principale 3 : ");
                 printf("\nVotre choix : ");
                 scanf("%d",&Search);
                 switch(Search){
@@ -112,6 +116,7 @@ void main() {
 				        printf("\n\tChoix non valid !\n");
 				        break;
 				}
+				}while(Search!=	3);  
 				break;
 			case 6 :
 			    printf("Les produits dont la quantite est inferieure a 3 : ");
@@ -132,11 +137,13 @@ void main() {
 				nbr--;
 				break;
 			case 9 :
-				printf("\nAfficher le total des prix des produits vendus en journee courante 1 : ");
+			    do{
+                printf("\nAfficher le total des prix des produits vendus en journee courante 1 : ");
                 printf("\nAfficher la moyenne des prix des produits vendus en journee courante 2 : ");
                 printf("\nAfficher le Max des prix des produits vendus en journee courante 3 : ");
                 printf("\nAfficher le Min des prix des produits vendus en journee courante 4 : ");
-                printf("\nVotre choix : ");
+                printf("\nRevenir au menu principale 5 : ");
+				printf("\nVotre choix : ");
                 scanf("%d",&Vente);
                 switch(Vente){
                 	case 1 :
@@ -149,7 +156,7 @@ void main() {
 					Total = total(A,N);
 					if(Total==0 ){
 						printf("Aucune vente aujourd'hui");
-					}else printf("La moyenne des prix des vente est %.2f DH",Moyenne);
+					}else printf("La moyenne des prix des vente est %.2f DH",moyenne(A,N));
                 		break;
                 	case 3 :
 					Total = total(A,N);
@@ -167,6 +174,7 @@ void main() {
 				      printf("\n\tChoix non valid !\n");
 				      break;
 				}
+				 }while(Vente!=5);
 				break;
 			default :
 				printf("\n\tChoix non valid !\n");

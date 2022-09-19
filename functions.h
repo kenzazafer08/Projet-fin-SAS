@@ -28,6 +28,20 @@ int pttc(int prix){
 	r = prix + ((prix*15)/100);
 	return r;
 }
+Date today(){
+    Date d;
+    int day, mois, an;
+     time_t now;
+     time(&now);
+      struct tm *local = localtime(&now);
+      day = local->tm_mday;
+      mois = local->tm_mon + 1;
+      an = local->tm_year + 1900;
+      d.jour=day;
+      d.mois=mois;
+      d.annee=an;
+      return d;
+}
 Produit* saisie(Produit *E,int tmp,int N){
     int i;
     for(i=tmp;i<N;i++){
@@ -119,20 +133,6 @@ Produit* Achatp(Produit *P,int N,char *code,int quant){
 		printf("\nVous avez entrer un code non valid !");
 	}
 	return P;
-}
-Date today(){
-    Date d;
-    int day, mois, an;
-     time_t now;
-     time(&now);
-      struct tm *local = localtime(&now);
-      day = local->tm_mday;
-      mois = local->tm_mon + 1;
-      an = local->tm_year + 1900;
-      d.jour=day;
-      d.mois=mois;
-      d.annee=an;
-      return d;
 }
 Achat* PAchat(Produit *P,Achat *A,char *code,int N,int quant){
 	int i,c=0,p,q;
@@ -306,10 +306,12 @@ Achat* achartoday(Achat *A,int N){
 int total(Achat *A,int N){
     Date d;
     int i,T=0;
+    int p;
     d=today();
     for(i=0;i<N;i++){
         if((A->d.jour==d.jour) && (A->d.mois==d.mois) && (A->d.annee==d.annee)){
-           T=T+(A[i].prix*A[i].quant);
+            p=A[i].prix;
+           T=T+p;
         }
     }return T;
 }
