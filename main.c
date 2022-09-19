@@ -49,7 +49,7 @@ void main() {
 	            if(nbr==0){
 				nbr = NV;
 				p = malloc(nbr*sizeof(Produit));
-				p = saisie(p,1,nbr);
+				p = saisie(p,0,nbr);
 				}else{
 					tmp=nbr;
 					nbr=nbr+NV;
@@ -71,6 +71,8 @@ void main() {
                 	case 2 :
 							affichage(p,nbr,Trie);
                 		break;
+					case 3 :
+					    break;
                 	default :
 				        printf("\n\tChoix non valid !\n");
 			        	break;
@@ -112,6 +114,8 @@ void main() {
 				        scanf("%d",&quant);
 						searchquant(p,nbr,quant);
                 		break;
+					case 3 :
+					    break;
 					default :
 				        printf("\n\tChoix non valid !\n");
 				        break;
@@ -170,6 +174,8 @@ void main() {
 						printf("Aucune vente aujourd'hui");
 					}else printf("Le Min des prix des produits vendus est %d DH",min(A,N));
                 		break;
+					case 5 :
+					    break;
 					default :
 				      printf("\n\tChoix non valid !\n");
 				      break;

@@ -42,6 +42,14 @@ Date today(){
       d.annee=an;
       return d;
 }
+int code(Produit *p,int nbr,char *code){
+    int i,c=0;
+    for(i=0;i<nbr;i++){
+        if(strcmp(p[i].code,code)==0){
+            return 1;
+        }
+    }return 0;
+}
 Produit* saisie(Produit *E,int tmp,int N){
     int i;
     for(i=tmp;i<N;i++){
@@ -55,6 +63,7 @@ Produit* saisie(Produit *E,int tmp,int N){
 	 printf("Quantite : ");
      scanf("%d",&E[i].quant);
      E[i].pTTC=pttc(E[i].prix);
+    
     }return E;
 }
 Produit* saisieun(Produit *E,int N){
@@ -141,7 +150,7 @@ Achat* PAchat(Produit *P,Achat *A,char *code,int N,int quant){
 		if(strcmp(P[i].code, code)==0){
 			c=P[i].pTTC;
             n=P[i].name;
-            p=P[i].prix;
+            p=P[i].prix * quant;
 		}
 	}
 	int day, mois, an;
@@ -304,17 +313,15 @@ Achat* achartoday(Achat *A,int N){
     }return AT;
 }
 int total(Achat *A,int N){
-    Date d;
+    Achat *d;
     int i,T=0;
     int p;
-    d=today();
+    d = achartoday(A,N);
     for(i=0;i<N;i++){
-        if((A->d.jour==d.jour) && (A->d.mois==d.mois) && (A->d.annee==d.annee)){
-            p=A[i].prix;
+            p=d[i].prix;
            T=T+p;
-        }
-    }return T;
-}
+        }return T;
+    }
 float moyenne(Achat *A,int N){
     float M;
     M=total(A,N)/N;
