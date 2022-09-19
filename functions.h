@@ -78,7 +78,7 @@ Produit* triNOM(Produit *P,int N){
         do{
        c=0;
       for(i=0;i<N-1;i++){
-        if(P[i].name[0]>P[i+1].name[0]){
+        if(strcmp(P[i].name,P[i+1].name)>0){
            Produit tmp;
            tmp=P[i];
            P[i]=P[i+1];
@@ -91,8 +91,11 @@ Produit* triNOM(Produit *P,int N){
 }
 void affichage(Produit *P,int nbr,int T){
        int i;
-	   if(T==1){
-	   	P = triprix(P,nbr);
+       if(nbr==0){
+        printf("Aucun produit");
+       }else {
+        if(T==1){
+	   	P = triNOM(P,nbr);
 	   }else P = triNOM(P,nbr);
     for(i=0;i<nbr;i++){
      printf("\n\tProduit %d: ",i+1);
@@ -100,7 +103,9 @@ void affichage(Produit *P,int nbr,int T){
      printf("\nNom : %s",P[i].name);
 	 printf("\nPrix : %d DH",P[i].prix);
 	 printf("\nQuantite : %d",P[i].quant);
-    } 
+    }
+       }
+	    
     }
 Produit* Achatp(Produit *P,int N,char *code,int quant){
 	int i,c;
@@ -270,10 +275,13 @@ Produit* supprimer(Produit *P,int N,char *code){
             c=c+1;
             for(j=i;j<N;j++){
                P[i]=P[i+1]; 
-            }free(&P[N-1]);
+            }
 
-}} N=N-1;
-    return &P[N];
+}
+}if(c==0){
+    printf("Code invalid ! ");
+}else printf("Done !");
+    return P;
 }
 Achat* achartoday(Achat *A,int N){
     Achat *AT;

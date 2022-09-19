@@ -128,6 +128,8 @@ void main() {
 			    printf("Entrer le code de produit que vous voulez supprimer : ");
 				scanf("%s",code);
 				p = supprimer(p,nbr,code);
+				free(&p[nbr-1]);
+				nbr--;
 				break;
 			case 9 :
 				printf("\nAfficher le total des prix des produits vendus en journee courante 1 : ");
@@ -147,7 +149,7 @@ void main() {
 					Total = total(A,N);
 					if(Total==0 ){
 						printf("Aucune vente aujourd'hui");
-					}else printf("La moyenne des prix des vente est %d",Moyenne);
+					}else printf("La moyenne des prix des vente est %.2f",Moyenne);
                 		break;
                 	case 3 :
 					Total = total(A,N);
