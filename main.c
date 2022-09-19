@@ -143,25 +143,25 @@ void main() {
                     Total = total(A,N);
                     if(Total==0 ){
 						printf("Aucune vente aujourd'hui");
-					}else printf("Le total de prix des vente est %d",Total);
+					}else printf("Le total de prix des vente est %d DH",Total);
                 		break;
                 	case 2 :
 					Total = total(A,N);
 					if(Total==0 ){
 						printf("Aucune vente aujourd'hui");
-					}else printf("La moyenne des prix des vente est %.2f",Moyenne);
+					}else printf("La moyenne des prix des vente est %.2f DH",Moyenne);
                 		break;
                 	case 3 :
 					Total = total(A,N);
 					if(Total==0 ){
 						printf("Aucune vente aujourd'hui");
-					}else printf("Le Max des prix des produits vendus est %d",max(A,N));
+					}else printf("Le Max des prix des produits vendus est %d DH",max(A,N));
                 		break;
                 	case 4 :
 					Total = total(A,N);
 					if(Total==0 ){
 						printf("Aucune vente aujourd'hui");
-					}else printf("Le Min des prix des produits vendus est %d",min(A,N));
+					}else printf("Le Min des prix des produits vendus est %d DH",min(A,N));
                 		break;
 					default :
 				      printf("\n\tChoix non valid !\n");
