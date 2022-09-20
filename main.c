@@ -14,17 +14,7 @@ void main() {
 	int quant;
 	int Total;
 	do {
-		printf("\n\t---Menu principale---");
-		printf("\nPour inserer un nouveaux produit Entrer 1 : ");
-		printf("\nPour inserer plusieurs nouveaux produits Entrer 2 : ");
-		printf("\nPour afficher la liste des produit Entrer 3 : ");
-		printf("\nPour acheter un produit Entrer 4 : ");
-		printf("\nPour rechercher un produit Entrer 5 : ");
-		printf("\nPour afficher l'etat de stock Entrer 6 : ");
-		printf("\nPour alimenter le stock Entrer 7 : ");
-		printf("\nPour supprimer un produit Entrer 8 : ");
-		printf("\nPour afficher les statistique de vente en journee courante Entrer 9 : ");
-		printf("\nPour quitter Entrer 0 : ");
+		menu();
 		printf("\nVotre choix : ");
 		scanf("%d",&choix);
 		switch(choix){
@@ -59,9 +49,7 @@ void main() {
 				break;
 			case 3 :
 			    do{
-				printf("\nOrdre alphabetique croissant du nom 1 : ");
-                printf("\nOrdre decroissant du prix 2 : ");
-				printf("\nRevenir au menu principale 3: ");
+				soumenu1();
                 printf("\nVotre choix : ");
                 scanf("%d",&Trie);
                 switch(Trie){
@@ -84,7 +72,8 @@ void main() {
 				scanf("%d",&code);
                 printf("Enter la quantite que vous voulez acheter : ");
                 scanf("%d",&quant);
-				if(N==0){
+				if(checkproduit(p,nbr,code,quant)==1){
+					if(N==0){
 			    N = 1;
 			    A = malloc(N*sizeof(Achat));
 			    A = PAchat(p,A,code,nbr,quant);
@@ -95,12 +84,12 @@ void main() {
 		     	A = PAchat(p,A,code,nbr,quant);
 		     	p = Achatp(p,nbr,code,quant);
 		    	}
+				}
+				else printf("Code ou quantite non valid !");
 				break;
 			case 5 :
 			    do{
-                printf("\nChercher par code 1 : ");
-                printf("\nChercher par quantite 2 : ");
-				printf("\nRevenir au menu principale 3 : ");
+                soumenu2();
                 printf("\nVotre choix : ");
                 scanf("%d",&Search);
                 switch(Search){
@@ -142,11 +131,7 @@ void main() {
 				break;
 			case 9 :
 			    do{
-                printf("\nAfficher le total des prix des produits vendus en journee courante 1 : ");
-                printf("\nAfficher la moyenne des prix des produits vendus en journee courante 2 : ");
-                printf("\nAfficher le Max des prix des produits vendus en journee courante 3 : ");
-                printf("\nAfficher le Min des prix des produits vendus en journee courante 4 : ");
-                printf("\nRevenir au menu principale 5 : ");
+                soumenu3();
 				printf("\nVotre choix : ");
                 scanf("%d",&Vente);
                 switch(Vente){

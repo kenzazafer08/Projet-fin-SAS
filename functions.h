@@ -101,6 +101,17 @@ Produit* triNOM(Produit *P,int N){
     }while(c>0);
 	return P;
 }
+int checkproduit(Produit *P,int nbr,int quant,int code){
+    int i; 
+    for(i=0;i<nbr;i++){
+         if(P[i].code==code && P[i].quant >= quant ){
+             
+                return 1;
+            }
+             else return 0;
+         
+    }
+}
 void affichage(Produit *P,int nbr,int T){
        int i;
        if(nbr==0){
@@ -228,10 +239,11 @@ Produit* alimenterstock(Produit *P,int N,int code,int quant){
         if(P[i].code == code){
             c=c+1;
             P[i].quant=P[i].quant+quant;
-        }if(c==0){
+        }
+    }if(c==0){
             printf("\nCode invalid !");
         }else printf("\nDone !");
-    }return P;
+    return P;
 }
 Produit* supprimer(Produit *P,int N,int code){
     int i,j,c=0;
@@ -239,16 +251,15 @@ Produit* supprimer(Produit *P,int N,int code){
         if(P[i].code==code){
             c=c+1;
             for(j=i;j<N;j++){
-               P[i]=P[i+1]; 
-            }
-
+               P[j]=P[j+1]; 
+            }return P;
 }
 }if(c==0){
     printf("Code invalid ! ");
 }else printf("Done !");
     return P;
 }
-Achat* achartoday(Achat *A,int N){
+Achat* achatoday(Achat *A,int N){
     Achat *AT;
     Date d;
     int i,j=0,T=0,C;
@@ -258,10 +269,10 @@ Achat* achartoday(Achat *A,int N){
            C=C+1;
             if(T==0){
                 T=T+1;
-                AT = malloc(T*sizeof(Produit));
+                AT = malloc(T*sizeof(Achat));
             }else {
                 T=T+1;
-                AT = realloc(AT,T*sizeof(Produit));
+                AT = realloc(AT,T*sizeof(Achat));
             }
             AT[j]=A[i];
             j++;
@@ -272,7 +283,7 @@ int total(Achat *A,int N){
     Achat *d;
     int i,T=0;
     int p;
-    d = achartoday(A,N);
+    d = achatoday(A,N);
     for(i=0;i<N;i++){
             p=d[i].prix;
            T=T+p;
@@ -285,7 +296,7 @@ float moyenne(Achat *A,int N){
 }
 int max(Achat *A,int N){
     int max,i;
-    A = achartoday(A,N);
+    A = achatoday(A,N);
     max = A[0].prix;
     for(i=0;i<N;i++){
         if(A[i].prix > max){
@@ -296,7 +307,7 @@ int max(Achat *A,int N){
 }
 int min(Achat *A,int N){
     int min,i;
-    A = achartoday(A,N);
+    A = achatoday(A,N);
     min = A[0].prix;
     for(i=0;i<N;i++){
         if(A[i].prix < min){
@@ -304,4 +315,34 @@ int min(Achat *A,int N){
         }
     } 
     return min;
+}
+void menu(){
+        printf("\n\t---Menu principale---");
+		printf("\n1 - Inserer un nouveaux produit : ");
+		printf("\n2 - Inserer plusieurs nouveaux produits : ");
+		printf("\n3 - Afficher la liste des produit : ");
+		printf("\n4 - Acheter un produit : ");
+		printf("\n5 - Rechercher un produit : ");
+		printf("\n6 - Afficher l'etat de stock : ");
+		printf("\n7 - Alimenter le stock : ");
+		printf("\n8 - Supprimer un produit : ");
+		printf("\n9 - Afficher les statistique de vente en journee courante : ");
+		printf("\n0 - Quitter : ");
+}
+void soumenu1(){
+        printf("\n1 - Ordre alphabetique croissant du nom : ");
+        printf("\n2 - Ordre decroissant du prix : ");
+		printf("\n3 - Revenir au menu principale : ");
+}
+void soumenu2(){
+        printf("\n1 - Chercher par code  : ");
+        printf("\n2 - Chercher par quantite  : ");
+		printf("\n3 - Revenir au menu principale  : ");
+}
+void soumenu3(){
+        printf("\n1 - Afficher le total des prix des produits vendus en journee courante : ");
+        printf("\n2 - Afficher la moyenne des prix des produits vendus en journee courante : ");
+        printf("\n3 - Afficher le Max des prix des produits vendus en journee courante : ");
+        printf("\n4 - Afficher le Min des prix des produits vendus en journee courante : ");
+        printf("\n6 - Revenir au menu principale : ");
 }
