@@ -19,7 +19,7 @@ void main() {
 		scanf("%d",&choix);
 		switch(choix){
 			case 0 :
-				printf("done !");
+				printf("done !"); 
 				break;
 			case 1 :
 			//Ajouter une case pour inserer un nouveau produit
