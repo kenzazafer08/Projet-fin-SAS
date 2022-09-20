@@ -128,7 +128,7 @@ void main() {
 				p = supprimer(p,nbr,code);
 				free(&p[nbr-1]);
 				nbr--;
-				printf("Done");
+				printf("\nDone !");
 				break;
 			case 9 :
 			    do{

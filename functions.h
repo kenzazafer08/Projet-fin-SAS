@@ -400,5 +400,5 @@ void soumenu3(){
         printf("\n2 - Afficher la moyenne des prix des produits vendus en journee courante : ");
         printf("\n3 - Afficher le Max des prix des produits vendus en journee courante : ");
         printf("\n4 - Afficher le Min des prix des produits vendus en journee courante : ");
-        printf("\n6 - Revenir au menu principale : ");
+        printf("\n5 - Revenir au menu principale : ");
 }
