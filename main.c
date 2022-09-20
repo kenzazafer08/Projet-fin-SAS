@@ -72,8 +72,8 @@ void main() {
 				scanf("%d",&code);
                 printf("Enter la quantite que vous voulez acheter : ");
                 scanf("%d",&quant);
-				if(checkproduit(p,nbr,code,quant)==1){
-					if(N==0){
+				if(checkproduit(p,nbr,code,quant)>=0){
+				if(N==0){
 			    N = 1;
 			    A = malloc(N*sizeof(Achat));
 			    A = PAchat(p,A,code,nbr,quant);
@@ -128,6 +128,7 @@ void main() {
 				p = supprimer(p,nbr,code);
 				free(&p[nbr-1]);
 				nbr--;
+				printf("Done");
 				break;
 			case 9 :
 			    do{

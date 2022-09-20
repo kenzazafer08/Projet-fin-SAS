@@ -102,15 +102,13 @@ Produit* triNOM(Produit *P,int N){
 	return P;
 }
 int checkproduit(Produit *P,int nbr,int quant,int code){
-    int i; 
+    int i,c=0; 
     for(i=0;i<nbr;i++){
          if(P[i].code==code && P[i].quant >= quant ){
-             
-                return 1;
+             c++;
             }
-             else return 0;
          
-    }
+    }return c;
 }
 void affichage(Produit *P,int nbr,int T){
        int i;
@@ -134,12 +132,8 @@ Produit* Achatp(Produit *P,int N,int code,int quant){
 	int i,c;
 	for(i=0;i<N;i++){
 		if(P[i].code ==code){
-			c=1;
 			P[i].quant= P[i].quant - quant;
 		}
-	}
-	if(c==0){
-		printf("\nVous avez entrer un code non valid !");
 	}
 	return P;
 }
@@ -252,14 +246,18 @@ Produit* supprimer(Produit *P,int N,int code){
             c=c+1;
             for(j=i;j<N;j++){
                P[j]=P[j+1]; 
-            }return P;
+            }
+            if(c==0){
+                printf("Code Invalid !");
+            }
+            return P;
 }
 }if(c==0){
     printf("Code invalid ! ");
 }else printf("Done !");
     return P;
 }
-Achat* achatoday(Achat *A,int N){
+ Achat* achatoday(Achat *A,int N){
     Achat *AT;
     Date d;
     int i,j=0,T=0,C;
@@ -280,15 +278,33 @@ Achat* achatoday(Achat *A,int N){
     }return AT;
 }
 int total(Achat *A,int N){
-    Achat *d;
-    int i,T=0;
-    int p;
-    d = achatoday(A,N);
+    Achat *AT;
+    int i,j=0,T=0,C,s=0,prix;
+    Date d=today();
     for(i=0;i<N;i++){
-            p=d[i].prix;
-           T=T+p;
-        }return T;
+        if((A->d.jour==d.jour) && (A->d.mois==d.mois) && (A->d.annee==d.annee)){
+           C=C+1;
+            if(T==0){
+                T=T+1;
+                AT = malloc(T*sizeof(Achat));
+            }else {
+                T=T+1;
+                AT = realloc(AT,T*sizeof(Achat));
+            }
+            AT[j]=A[i];
+            j++;
+        }
     }
+    if(T==0){
+        printf("\nAucun produit acheter aujourd'hui !");
+    }else {
+      for(j=0;j<T;j++){
+            prix=AT[j].prix;
+           s=s+prix;
+        }
+    }
+    return s;
+}
 float moyenne(Achat *A,int N){
     float M;
     M=total(A,N)/N;
@@ -296,24 +312,64 @@ float moyenne(Achat *A,int N){
 }
 int max(Achat *A,int N){
     int max,i;
-    A = achatoday(A,N);
-    max = A[0].prix;
+    Achat *AT;
+    int j=0,T=0,C,s=0,prix;
+    Date d=today();
     for(i=0;i<N;i++){
-        if(A[i].prix > max){
-            max = A[i].prix;
+        if((A->d.jour==d.jour) && (A->d.mois==d.mois) && (A->d.annee==d.annee)){
+           C=C+1;
+            if(T==0){
+                T=T+1;
+                AT = malloc(T*sizeof(Achat));
+            }else {
+                T=T+1;
+                AT = realloc(AT,T*sizeof(Achat));
+            }
+            AT[j]=A[i];
+            j++;
+        }
+    }
+    if(T==0){
+        printf("\nAucun produit acheter aujourd'hui !");
+    }else {
+    max = AT[0].prix;
+    for(i=0;i<T;i++){
+        if(AT[i].prix > max){
+            max = AT[i].prix;
         }
     } 
-    return max;
+    
+}return max;
 }
 int min(Achat *A,int N){
-    int min,i;
-    A = achatoday(A,N);
-    min = A[0].prix;
+        int min,i;
+    Achat *AT;
+    int j=0,T=0,C,s=0,prix;
+    Date d=today();
     for(i=0;i<N;i++){
-        if(A[i].prix < min){
-            min  = A[i].prix;
+        if((A->d.jour==d.jour) && (A->d.mois==d.mois) && (A->d.annee==d.annee)){
+           C=C+1;
+            if(T==0){
+                T=T+1;
+                AT = malloc(T*sizeof(Achat));
+            }else {
+                T=T+1;
+                AT = realloc(AT,T*sizeof(Achat));
+            }
+            AT[j]=A[i];
+            j++;
+        }
+    }
+    if(T==0){
+        printf("\nAucun produit acheter aujourd'hui !");
+    }else {
+    min = AT[0].prix;
+    for(i=0;i<T;i++){
+        if(AT[i].prix < min){
+            min = AT[i].prix;
         }
     } 
+}
     return min;
 }
 void menu(){
