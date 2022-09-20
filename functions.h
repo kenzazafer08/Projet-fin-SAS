@@ -299,7 +299,7 @@ int total(Achat *A,int N){
         printf("\nAucun produit acheter aujourd'hui !");
     }else {
       for(j=0;j<T;j++){
-            prix=AT[j].prix;
+           prix=AT[j].prix;
            s=s+prix;
         }
     }
