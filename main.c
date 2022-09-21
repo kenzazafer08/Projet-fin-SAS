@@ -26,11 +26,11 @@ void main() {
 				if(nbr==0){
 				nbr=1;
 				p = malloc(nbr*sizeof(Produit));
-				p = saisieun(p,nbr);
+				saisieun(p,nbr);
 				}else{
 					nbr=nbr+1;
 					p = realloc(p,nbr*sizeof(Produit));
-					p = saisieun(p,nbr);
+					saisieun(p,nbr);
 				}
 				break;
 			case 2 :
@@ -39,12 +39,12 @@ void main() {
 	            if(nbr==0){
 				nbr = NV;
 				p = malloc(nbr*sizeof(Produit));
-				p = saisie(p,0,nbr);
+				saisie(p,0,nbr);
 				}else{
 					tmp=nbr;
 					nbr=nbr+NV;
 					p = realloc(p,sizeof(Produit)*nbr);
-					p = saisie(p,tmp,nbr);
+					saisie(p,tmp,nbr);
 				}
 				break;
 			case 3 :
@@ -76,13 +76,13 @@ void main() {
 				if(N==0){
 			    N = 1;
 			    A = malloc(N*sizeof(Achat));
-			    A = PAchat(p,A,code,nbr,quant);
-			    p = Achatp(p,nbr,code,quant);
+			    PAchat(p,A,code,nbr,quant);
+			    Achatp(p,nbr,code,quant);
 			    }else{
 			    N=N+1;
 		     	A = realloc(A,N*sizeof(Achat));
-		     	A = PAchat(p,A,code,nbr,quant);
-		     	p = Achatp(p,nbr,code,quant);
+		     	PAchat(p,A,code,nbr,quant);
+		     	Achatp(p,nbr,code,quant);
 		    	}
 				}
 				else printf("Code ou quantite non valid !");
@@ -120,12 +120,12 @@ void main() {
 				scanf("%d",&code);
                 printf("Enter la quantite : ");
                 scanf("%d",&quant);
-				p = alimenterstock(p,nbr,code,quant);
+				alimenterstock(p,nbr,code,quant);
 				break;
 			case 8 :
 			    printf("Entrer le code de produit que vous voulez supprimer : ");
 				scanf("%d",&code);
-				p = supprimer(p,nbr,code);
+				supprimer(p,nbr,code);
 				free(&p[nbr-1]);
 				nbr--;
 				printf("\nDone !");

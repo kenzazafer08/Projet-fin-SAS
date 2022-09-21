@@ -42,7 +42,7 @@ Date today(){
       d.annee=an;
       return d;
 }
-Produit* saisie(Produit *E,int tmp,int N){
+void saisie(Produit *E,int tmp,int N){
     int i;
     for(i=tmp;i<N;i++){
      printf("\nProduit %d: \n",i+1);
@@ -54,9 +54,9 @@ Produit* saisie(Produit *E,int tmp,int N){
      scanf("%d",&E[i].quant);
      E[i].pTTC=pttc(E[i].prix);
      E[i].code= i+1;
-    }return E;
+    }
 }
-Produit* saisieun(Produit *E,int N){
+void saisieun(Produit *E,int N){
     int i=N-1;
      printf("\nProduit %d: \n",i+1);
      printf("Nom : ");
@@ -67,7 +67,6 @@ Produit* saisieun(Produit *E,int N){
      scanf("%d",&E[i].quant);
      E[i].pTTC=pttc(E[i].prix);
      E[i].code= i+1;
-    return E;
 }
 Produit* triprix(Produit *tab,int N){
         int c,i;
@@ -128,16 +127,15 @@ void affichage(Produit *P,int nbr,int T){
        }
 	    
     }
-Produit* Achatp(Produit *P,int N,int code,int quant){
+void Achatp(Produit *P,int N,int code,int quant){
 	int i,c;
 	for(i=0;i<N;i++){
 		if(P[i].code ==code){
 			P[i].quant= P[i].quant - quant;
 		}
 	}
-	return P;
 }
-Achat* PAchat(Produit *P,Achat *A,int code,int N,int quant){
+void PAchat(Produit *P,Achat *A,int code,int N,int quant){
 	int i,c=0,p,q;
     char *n;
 	for(i=0;i<N;i++){
@@ -171,8 +169,6 @@ Achat* PAchat(Produit *P,Achat *A,int code,int N,int quant){
 		printf("\nPrix TTC : %.2f DH",A[i].pTTC);
 		printf("\nDate achat : %d/%d/%d",A[i].d.jour,A[i].d.mois,A[i].d.annee);
 		}
-
-	return A;
 }
 void searchcode(Produit *P,int N,int code){
     int i,j=0,C=0;
@@ -227,7 +223,7 @@ J++;        }
         printf("\nAucun produit ! ");
     }
 }
-Produit* alimenterstock(Produit *P,int N,int code,int quant){
+void alimenterstock(Produit *P,int N,int code,int quant){
     int i,c=0;
     for(i=0;i<N;i++){
         if(P[i].code == code){
@@ -237,9 +233,9 @@ Produit* alimenterstock(Produit *P,int N,int code,int quant){
     }if(c==0){
             printf("\nCode invalid !");
         }else printf("\nDone !");
-    return P;
+
 }
-Produit* supprimer(Produit *P,int N,int code){
+void supprimer(Produit *P,int N,int code){
     int i,j,c=0;
     for(i=0;i<N;i++){
         if(P[i].code==code){
@@ -250,12 +246,12 @@ Produit* supprimer(Produit *P,int N,int code){
             if(c==0){
                 printf("Code Invalid !");
             }
-            return P;
+
 }
 }if(c==0){
     printf("Code invalid ! ");
 }else printf("Done !");
-    return P;
+
 }
 int total(Achat *A,int N){
     int i,prix,s=0;
