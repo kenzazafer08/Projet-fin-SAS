@@ -83,6 +83,7 @@ void affichage(Produit *P,int nbr,int T){
        int i;
        if(nbr==0){
         printf("Aucun produit");
+		printf("\n");
        }else {
 	if(T == 1){
 		 Trinom(P,nbr);
@@ -95,6 +96,7 @@ void affichage(Produit *P,int nbr,int T){
      printf("\nNom : %s",P[i].nom);
 	 printf("\nPrix : %d DH",P[i].prix);
 	 printf("\nQuantite : %d",P[i].quant);
+	 printf("\n");
     }
        }
 
@@ -120,7 +122,7 @@ void Acheter(Produit *P,int nbr,int na,Achat *A,int code,int quantite){
 	for(i=0;i<nbr;i++){
 		if(P[i].code==code && P[i].quant >= quantite) {
 			c++;
-			P[na-1].quant = P[i].quant - quantite ;
+			P[i].quant = P[i].quant - quantite ;
 			A[na-1].p.quant =  quantite;
 			A[na-1].p.code =  code;
 			A[na-1].p.prix =  P[i].prix * quantite;
@@ -131,6 +133,7 @@ void Acheter(Produit *P,int nbr,int na,Achat *A,int code,int quantite){
 	}
 	if(c==0){
 		printf("\nCode invalid ou quantite insufisante !");
+		printf("\n");
 	}else {
 	printf("\n\tProduit acheter : ");
 	printf("\nCode : %d",A[na-1].p.code);
@@ -139,6 +142,7 @@ void Acheter(Produit *P,int nbr,int na,Achat *A,int code,int quantite){
 	printf("\nPrix TTC : %d DH",A[na-1].p.pTTC);
 	printf("\nQuantite : %d",A[na-1].p.quant);
 	printf("\nDate d'achat : %d/%d/%d ",A[na-1].d.day,A[na-1].d.mois,A[na-1].d.year);
+	printf("\n");
 	}
 }
 //Recherche par code
@@ -154,9 +158,11 @@ void searchcode(Produit *P,int N,int code){
 	        printf("\nQuantite : %d",P[i].quant);
             J++;
 			}
+			printf("\n");
     }
     if(C==0){
         printf("\nAucun produit ! ");
+		printf("\n");
     }
 }
 //Recherche par code
@@ -172,9 +178,11 @@ void searchquantite(Produit *P,int N,int quant){
 	        printf("\nQuantite : %d",P[i].quant);
             J++;
 			}
+			printf("\n");
     }
     if(C==0){
         printf("\nAucun produit ! ");
+		printf("\n");
     }
 }
 //Recherche des produit dont la quantite est inferieur a 3
@@ -189,10 +197,11 @@ void etatstock(Produit *P,int N){
 	        printf("\nPrix : %d DH",P[i].prix);
 	        printf("\nQuantite : %d",P[i].quant);
             J++;
-			}
+			}printf("\n");
     }
     if(C==0){
         printf("\nAucun produit ! ");
+		printf("\n");
     }
 }
 
@@ -207,6 +216,7 @@ void alimenter(Produit *p,int nbr,int quant,int code){
 		}
 	} if(c==0){
 		printf("\nCode non valid !");
+		printf("\n");
 	}
 }
 
@@ -228,6 +238,7 @@ void suprrimer(Produit *p,int nbr,int code){
 
 	if(c==0){
 		printf("\nCode non valid !");
+		printf("\n");
 	}else printf("\nDone !");
 }
 //Total prix
@@ -241,8 +252,15 @@ int total(Achat *A,int nbr){
 	 }return somme;
 }
 int moyenne(Achat *A,int nbr){
-	 int moyenne;
-     moyenne= total(A,nbr)/nbr;
+	 int moyenne,i,somme=0,N=0;
+	 Date d=today();
+	 for(i=0;i<nbr;i++){
+		if((A[i].d.day==d.day) && (A[i].d.mois==d.mois) && (A[i].d.year==d.year)){
+	    somme += A[i].p.prix;
+		N++;
+		}
+	}
+     moyenne= somme/N;
 	 return moyenne;
 }
 int max(Achat *A,int nbr){
@@ -265,34 +283,37 @@ int max(Achat *A,int nbr){
 //Affichage du menu
 void menu(){
         printf("\n\t---Menu principale---");
-		printf("\n1 - Inserer un nouveaux produit : ");
-		printf("\n2 - Inserer plusieurs nouveaux produits : ");
-		printf("\n3 - Afficher la liste des produit : ");
-		printf("\n4 - Acheter un produit : ");
-		printf("\n5 - Rechercher un produit : ");
-		printf("\n6 - Afficher l'etat de stock : ");
-		printf("\n7 - Alimenter le stock : ");
-		printf("\n8 - Supprimer un produit : ");
-		printf("\n9 - Afficher les statistique de vente en journee courante : ");
-		printf("\n0 - Quitter : ");
+		printf("\n  1 - Inserer un nouveaux produit : ");
+		printf("\n  2 - Inserer plusieurs nouveaux produits : ");
+		printf("\n  3 - Afficher la liste des produit : ");
+		printf("\n  4 - Acheter un produit : ");
+		printf("\n  5 - Rechercher un produit : ");
+		printf("\n  6 - Afficher l'etat de stock : ");
+		printf("\n  7 - Alimenter le stock : ");
+		printf("\n  8 - Supprimer un produit : ");
+		printf("\n  9 - Afficher les statistique de vente en journee courante : ");
+		printf("\n  0 - Quitter : ");
 }
 
 void soumenu1(){
-        printf("\n1 - Ordre alphabetique croissant du nom : ");
-        printf("\n2 - Ordre decroissant du prix : ");
-		printf("\n3 - Revenir au menu principale : ");
+	    printf("\n\t---Menu Affichage---");
+        printf("\n  1 - Ordre alphabetique croissant du nom : ");
+        printf("\n  2 - Ordre decroissant du prix : ");
+		printf("\n  3 - Revenir au menu principale : ");
 }
 void soumenu2(){
-        printf("\n1 - Chercher par code  : ");
-        printf("\n2 - Chercher par quantite  : ");
-		printf("\n3 - Revenir au menu principale  : ");
+	    printf("\n\t---Menu Recherche---");
+        printf("\n  1 - Chercher par code  : ");
+        printf("\n  2 - Chercher par quantite  : ");
+		printf("\n  3 - Revenir au menu principale  : ");
 }
 void soumenu3(){
-        printf("\n1 - Afficher le total des prix des produits vendus en journee courante : ");
-        printf("\n2 - Afficher la moyenne des prix des produits vendus en journee courante : ");
-        printf("\n3 - Afficher le Max des prix des produits vendus en journee courante : ");
-        printf("\n4 - Afficher le Min des prix des produits vendus en journee courante : ");
-        printf("\n5 - Revenir au menu principale : ");
+	    printf("\n\t---Menu Statistique---");
+        printf("\n  1 - Total des prix des produits vendus : ");
+        printf("\n  2 - Moyenne des prix des produits vendus : ");
+        printf("\n  3 - Valeur maximale des prix des produits vendus : ");
+        printf("\n  4 - Valeur minimale des prix des produits vendus : ");
+        printf("\n  5 - Revenir au menu principale : ");
 }
 //variables de menu
 int choix,Tri,Search,Vente;
@@ -311,6 +332,7 @@ int code,quantite,somme;
 int main(int argc, char *argv[]) {
  do  {
  	menu();
+	printf("\n");
  	printf("\nVotre choix : ");
  	scanf("%d",&choix);
 	switch(choix){
@@ -338,6 +360,7 @@ int main(int argc, char *argv[]) {
 		case 3 :
 			do{
 			soumenu1();
+			printf("\n");
 			printf("\nVotre choix : ");
  	        scanf("%d",&Tri);
 	        switch(Tri){
@@ -371,6 +394,7 @@ int main(int argc, char *argv[]) {
 		case 5 :
 			do{
 			soumenu2();
+			printf("\n");
 			printf("\nVotre choix : ");
  	        scanf("%d",&Search);
  	        switch(Search){
@@ -393,6 +417,7 @@ int main(int argc, char *argv[]) {
 			}while(Search != 3);
 			break;
 		case 6 :
+		    printf("Les produit dont la quantite inferieure a 3 :");
 			etatstock(p,NP);
 			break;
 		case 7 :
@@ -411,6 +436,7 @@ int main(int argc, char *argv[]) {
 		case 9 :
             do {
 			soumenu3();
+			printf("\n");
             printf("\nVotre choix : ");
  	        scanf("%d",&Vente);
 			somme=total(A,NA);
@@ -421,24 +447,28 @@ int main(int argc, char *argv[]) {
  	        			printf("Aucune vente aujord'hui !");
 					 }  else
 					 printf("La somme des prix est : %d",somme);
+					 printf("\n");
  	        		break;
 				case 2 :
 					if(somme==0) {
  	        			printf("Aucune vente aujord'hui !");
 					 }  else
 					 printf("La moyenne des prix est : %d",moyenne(A,NA));
+					 printf("\n");
  	        		break;
 				case 3 :
 					if(somme==0) {
  	        			printf("Aucune vente aujord'hui !");
 					 }  else
 					 printf("La valeaur maximale des prix est : %d",max(A,NA));
+					 printf("\n");
  	        		break;
  	        	case 4 :
  	        		if(somme==0) {
  	        			printf("Aucune vente aujord'hui !");
 					 }  else
 					 printf("La valeaur minimale des prix est : %d",min(A,NA));
+					 printf("\n");
  	        		break;
 				case 5 :
  	        		break;
