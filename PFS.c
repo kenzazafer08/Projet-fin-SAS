@@ -165,7 +165,7 @@ void searchcode(Produit *P,int N,int code){
 		printf("\n");
     }
 }
-//Recherche par code
+//Recherche par quantite
 void searchquantite(Produit *P,int N,int quant){
 	int i,J=0,C=0;
     for(i=0;i<N;i++){
@@ -251,6 +251,7 @@ int total(Achat *A,int nbr){
 		}
 	 }return somme;
 }
+//Moyenne prix
 int moyenne(Achat *A,int nbr){
 	 int moyenne,i,somme=0,N=0;
 	 Date d=today();
@@ -263,6 +264,7 @@ int moyenne(Achat *A,int nbr){
      moyenne= somme/N;
 	 return moyenne;
 }
+//MAX prix
 int max(Achat *A,int nbr){
 	 int i,max=0;
      Date d=today();
@@ -271,7 +273,9 @@ int max(Achat *A,int nbr){
 	    max = A[i].p.prix;
 		}
 	 }return max;
-}int min(Achat *A,int nbr){
+}
+//MIN prix
+int min(Achat *A,int nbr){
 	 int i,min=max(A,nbr);
   Date d=today();
 	 for(i=0;i<nbr;i++){
