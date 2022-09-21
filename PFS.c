@@ -34,7 +34,7 @@ void saisiun(Produit *p,int NP){
 void saisi(Produit *p,int NP,int tmp){
 	int i;
 	for(i=tmp;i<NP;i++){
-	printf("\n\t---Produit %d---",i+1);
+ printf("\n\t---Produit %d---",i+1);
 	printf("\nNom : ");
 	scanf("%s",p[i].nom);
 	printf("Prix : ");
