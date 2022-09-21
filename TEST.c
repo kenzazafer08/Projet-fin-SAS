@@ -228,7 +228,7 @@ void suprrimer(Produit *p,int nbr,int code){
 
 	if(c==0){
 		printf("\nCode non valid !");
-	}
+	}else printf("\nDone !");
 }
 //Total prix
 int total(Achat *A,int nbr){
