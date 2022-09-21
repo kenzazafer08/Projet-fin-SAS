@@ -18,14 +18,15 @@ typedef struct{
 	Produit p;
 	Date d;
 }Achat;
+
 //Ajouter un produit
 void saisiun(Produit *p,int NP){
-	printf("\n\t---Produit %d---",NP);
-	printf("\nNom : ");
+	printf("\n\t---Medicament %d---",NP);
+	printf("\n  Nom : ");
 	scanf("%s",p[NP-1].nom);
-	printf("Prix : ");
+	printf("  Prix : ");
 	scanf("%d",&p[NP-1].prix);
-	printf("Quantite : ");
+	printf("  Quantite : ");
 	scanf("%d",&p[NP-1].quant);
 	p[NP-1].pTTC=p[NP-1].prix +((p[NP-1].prix * 15)/100);
 	p[NP-1].code = NP;
@@ -34,15 +35,15 @@ void saisiun(Produit *p,int NP){
 void saisi(Produit *p,int NP,int tmp){
 	int i;
 	for(i=tmp;i<NP;i++){
- printf("\n\t---Produit %d---",i+1);
-	printf("\nNom : ");
+    printf("\n\t---Medicament %d---",i+1);
+	printf("\n  Nom : ");
 	scanf("%s",p[i].nom);
-	printf("Prix : ");
+	printf("  Prix : ");
 	scanf("%d",&p[i].prix);
-	printf("Quantite : ");
+	printf("  Quantite : ");
 	scanf("%d",&p[i].quant);
 	p[i].pTTC=p[i].prix +((p[i].prix * 15)/100);
-	p[i].code = i+1;
+    p[i].code = i+1;
     }
 }
 //Tri par prix
@@ -81,7 +82,7 @@ void Trinom(Produit *tab,int N){
 void affichage(Produit *P,int nbr,int T){
        int i;
        if(nbr==0){
-        printf("Aucun produit");
+        printf("  Aucun Medicament");
 		printf("\n");
        }else {
 	if(T == 1){
@@ -90,11 +91,11 @@ void affichage(Produit *P,int nbr,int T){
 	    Triprix(P,nbr);
 	   }
     for(i=0;i<nbr;i++){
-     printf("\n\tProduit %d: ",i+1);
-     printf("\nCode : %d",P[i].code);
-     printf("\nNom : %s",P[i].nom);
-	 printf("\nPrix : %d DH",P[i].prix);
-	 printf("\nQuantite : %d",P[i].quant);
+     printf("\n\t  Medicament %d: ",i+1);
+     printf("\n  Code : %d",P[i].code);
+     printf("\n  Nom : %s",P[i].nom);
+	 printf("\n  Prix : %d DH",P[i].prix);
+	 printf("\n  Quantite : %d",P[i].quant);
 	 printf("\n");
     }
        }
@@ -131,36 +132,35 @@ void Acheter(Produit *P,int nbr,int na,Achat *A,int code,int quantite){
 		}
 	}
 	if(c==0){
-		printf("\nCode invalid ou quantite insufisante !");
+		printf("\n  Code invalid ou quantite insufisante !");
 		printf("\n");
 	}else {
-	printf("\n\tProduit acheter : ");
-	printf("\nCode : %d",A[na-1].p.code);
-    printf("\nNom : %s",A[na-1].p.nom);
-	printf("\nPrix : %d DH",A[na-1].p.prix);
-	printf("\nPrix TTC : %d DH",A[na-1].p.pTTC);
-	printf("\nQuantite : %d",A[na-1].p.quant);
-	printf("\nDate d'achat : %d/%d/%d ",A[na-1].d.day,A[na-1].d.mois,A[na-1].d.year);
+	printf("\n\t  Medicament acheter : ");
+	printf("\n  Code : %d",A[na-1].p.code);
+    printf("\n  Nom : %s",A[na-1].p.nom);
+	printf("\n  Prix : %d DH",A[na-1].p.prix);
+	printf("\n  Prix TTC : %d DH",A[na-1].p.pTTC);
+	printf("\n  Quantite : %d",A[na-1].p.quant);
+	printf("\n  Date d'achat : %d/%d/%d ",A[na-1].d.day,A[na-1].d.mois,A[na-1].d.year);
 	printf("\n");
 	}
 }
 //Recherche par code
 void searchcode(Produit *P,int N,int code){
- int i,J=0,C=0;
+ int i,C=0;
     for(i=0;i<N;i++){
         if(P[i].code == code){
 			C++;
-            printf("\n\tProduit %d: ",J+1);
-            printf("\nCode : %d",P[i].code);
-            printf("\nNom : %s",P[i].nom);
-	        printf("\nPrix : %d DH",P[i].prix);
-	        printf("\nQuantite : %d",P[i].quant);
-            J++;
+            printf("\n\t  Medicament Trouver: ");
+            printf("\n  Code : %d",P[i].code);
+            printf("\n  Nom : %s",P[i].nom);
+	        printf("\n  Prix : %d DH",P[i].prix);
+	        printf("\n  Quantite : %d",P[i].quant);
 			}
 			printf("\n");
     }
     if(C==0){
-        printf("\nAucun produit ! ");
+        printf("\n  Aucun Medicament ! ");
 		printf("\n");
     }
 }
@@ -170,17 +170,17 @@ void searchquantite(Produit *P,int N,int quant){
     for(i=0;i<N;i++){
         if(P[i].quant == quant){
 			C++;
-            printf("\n\tProduit %d: ",J+1);
-            printf("\nCode : %d",P[i].code);
-            printf("\nNom : %s",P[i].nom);
-	        printf("\nPrix : %d DH",P[i].prix);
-	        printf("\nQuantite : %d",P[i].quant);
+            printf("\n\t  Medicament %d: ",J+1);
+            printf("\n  Code : %d",P[i].code);
+            printf("\n  Nom : %s",P[i].nom);
+	        printf("\n  Prix : %d DH",P[i].prix);
+	        printf("\n  Quantite : %d",P[i].quant);
             J++;
 			}
 			printf("\n");
     }
     if(C==0){
-        printf("\nAucun produit ! ");
+        printf("\n  Aucun Medicament ! ");
 		printf("\n");
     }
 }
@@ -190,16 +190,17 @@ void etatstock(Produit *P,int N){
     for(i=0;i<N;i++){
         if(P[i].quant < 3){
 			C++;
-            printf("\n\tProduit %d: ",J+1);
-            printf("\nCode : %d",P[i].code);
-            printf("\nNom : %s",P[i].nom);
-	        printf("\nPrix : %d DH",P[i].prix);
-	        printf("\nQuantite : %d",P[i].quant);
+            printf("\n\t  Medicament %d: ",J+1);
+            printf("\n  Code : %d",P[i].code);
+            printf("\n  Nom : %s",P[i].nom);
+	        printf("\n  Prix : %d DH",P[i].prix);
+	        printf("\n  Quantite : %d",P[i].quant);
+	        printf("\n");
             J++;
-			}printf("\n");
+			}
     }
     if(C==0){
-        printf("\nAucun produit ! ");
+        printf("  Aucun Medicament ! ");
 		printf("\n");
     }
 }
@@ -211,10 +212,10 @@ void alimenter(Produit *p,int nbr,int quant,int code){
 		if(p[i].code==code){
 		c++;
 		p[i].quant+=quant;
-		printf("\nDone !");
+		printf("\n  Done !");
 		}
 	} if(c==0){
-		printf("\nCode non valid !");
+		printf("\n  Code non valid !");
 		printf("\n");
 	}
 }
@@ -236,9 +237,9 @@ void suprrimer(Produit *p,int nbr,int code){
 	}
 
 	if(c==0){
-		printf("\nCode non valid !");
+		printf("\n  Code non valid !");
 		printf("\n");
-	}else printf("\nDone !");
+	}else printf("\n  Done !");
 }
 //Total prix
 int total(Achat *A,int nbr){
@@ -286,15 +287,15 @@ int min(Achat *A,int nbr){
 //Affichage du menu
 void menu(){
         printf("\n\t---Menu principale---");
-		printf("\n  1 - Inserer un nouveaux produit : ");
-		printf("\n  2 - Inserer plusieurs nouveaux produits : ");
-		printf("\n  3 - Afficher la liste des produit : ");
-		printf("\n  4 - Acheter un produit : ");
-		printf("\n  5 - Rechercher un produit : ");
+		printf("\n  1 - Inserer un nouveaux medicament : ");
+		printf("\n  2 - Inserer plusieurs nouveaux medicaments : ");
+		printf("\n  3 - Afficher la liste des medicaments : ");
+		printf("\n  4 - Acheter un medicament : ");
+		printf("\n  5 - Rechercher un medicament : ");
 		printf("\n  6 - Afficher l'etat de stock : ");
 		printf("\n  7 - Alimenter le stock : ");
-		printf("\n  8 - Supprimer un produit : ");
-		printf("\n  9 - Afficher les statistique de vente en journee courante : ");
+		printf("\n  8 - Supprimer un medicament : ");
+		printf("\n  9 - Afficher les statistique des medicaments vendu en journee courante : ");
 		printf("\n  0 - Quitter : ");
 }
 
@@ -312,10 +313,10 @@ void soumenu2(){
 }
 void soumenu3(){
 	    printf("\n\t---Menu Statistique---");
-        printf("\n  1 - Total des prix des produits vendus : ");
-        printf("\n  2 - Moyenne des prix des produits vendus : ");
-        printf("\n  3 - Valeur maximale des prix des produits vendus : ");
-        printf("\n  4 - Valeur minimale des prix des produits vendus : ");
+        printf("\n  1 - Total des prix des medicaments vendus : ");
+        printf("\n  2 - Moyenne des prix des medicaments vendus : ");
+        printf("\n  3 - Valeur maximale des prix des medicaments vendus : ");
+        printf("\n  4 - Valeur minimale des prix des medicaments vendus : ");
         printf("\n  5 - Revenir au menu principale : ");
 }
 //variables de menu
@@ -333,10 +334,13 @@ int code,quantite,somme;
 
 
 int main(int argc, char *argv[]) {
+	printf("\n\n");
+	printf("\t>>>>>>Gestion de Pharmacie<<<<<<");
+	printf("\n");
  do  {
  	menu();
 	printf("\n");
- 	printf("\nVotre choix : ");
+ 	printf("\n  Votre choix : ");
  	scanf("%d",&choix);
 	switch(choix){
 		case 1 :
@@ -349,7 +353,7 @@ int main(int argc, char *argv[]) {
 			saisiun(p,NP);
 			break;
 		case 2 :
-			printf("Combien de produit vous voulez acheter ? ");
+			printf("  Combien de produit vous voulez acheter ? ");
 			scanf("%d",&nbr);
 			tmp=NP;
 			NP+=nbr;
@@ -364,7 +368,7 @@ int main(int argc, char *argv[]) {
 			do{
 			soumenu1();
 			printf("\n");
-			printf("\nVotre choix : ");
+			printf("\n  Votre choix : ");
  	        scanf("%d",&Tri);
 	        switch(Tri){
 	        	case 1 :
@@ -376,15 +380,15 @@ int main(int argc, char *argv[]) {
 				case 3 :
 	        		break;
 	        	default :
-				printf("Choix non valid ! ");
+				printf("  Choix non valid ! ");
 	        		break;
 			}
 			}while(Tri!=3);
 			break;
 		case 4 :
-			printf("Entrer le code du produit que vous voulez acheter : ");
+			printf("  Entrer le code du produit que vous voulez acheter : ");
 			scanf("%d",&code);
-			printf("Entrer la quantite : ");
+			printf("  Entrer la quantite : ");
 			scanf("%d",&quantite);
 			NA+=1;
 			if(NA==1){
@@ -398,40 +402,40 @@ int main(int argc, char *argv[]) {
 			do{
 			soumenu2();
 			printf("\n");
-			printf("\nVotre choix : ");
+			printf("\n  Votre choix : ");
  	        scanf("%d",&Search);
  	        switch(Search){
  	        case 1 :
- 	        	printf("\nEntrer le code : ");
+ 	        	printf("\n  Entrer le code : ");
  	        	scanf("%d",&code);
  	        	searchcode(p,NP,code);
  	        	break;
 			case 2 :
-				printf("\nEntrer la quantite : ");
+				printf("\n  Entrer la quantite : ");
  	        	scanf("%d",&quantite);
  	        	searchquantite(p,NP,quantite);
  	        	break;
 			case 3 :
  	        	break;
 		    default :
-			printf("Choix non valid ! ");
+			printf("  Choix non valid ! ");
 	        break;
 			 }
 			}while(Search != 3);
 			break;
 		case 6 :
-		    printf("Les produit dont la quantite inferieure a 3 :");
+		    printf("  Les produit dont la quantite inferieure a 3 :");
 			etatstock(p,NP);
 			break;
 		case 7 :
-			printf("Entrer le code du produit que vous voulez alimenter :");
+			printf("  Entrer le code du produit que vous voulez alimenter :");
 			scanf("%d",&code);
-			printf("Entrer la quantite : ");
+			printf("  Entrer la quantite : ");
 			scanf("%d",&quantite);
 			alimenter(p,NP,quantite,code);
 			break;
 		case 8 :
-            printf("Entrer le code du produit que vous voulez supprimer :");
+            printf("  Entrer le code du produit que vous voulez supprimer :");
 			scanf("%d",&code);
 			suprrimer(p,NP,code);
             NP--;
@@ -440,43 +444,43 @@ int main(int argc, char *argv[]) {
             do {
 			soumenu3();
 			printf("\n");
-            printf("\nVotre choix : ");
+            printf("\n  Votre choix : ");
  	        scanf("%d",&Vente);
 			somme=total(A,NA);
  	        switch(Vente){
  	        	case 1 :
 
  	        		if(somme==0) {
- 	        			printf("Aucune vente aujord'hui !");
+ 	        			printf("  Aucune vente aujord'hui !");
 					 }  else
-					 printf("La somme des prix est : %d",somme);
+					 printf("  La somme des prix est : %d",somme);
 					 printf("\n");
  	        		break;
 				case 2 :
 					if(somme==0) {
- 	        			printf("Aucune vente aujord'hui !");
+ 	        			printf("  Aucune vente aujord'hui !");
 					 }  else
-					 printf("La moyenne des prix est : %d",moyenne(A,NA));
+					 printf("  La moyenne des prix est : %d",moyenne(A,NA));
 					 printf("\n");
  	        		break;
 				case 3 :
 					if(somme==0) {
- 	        			printf("Aucune vente aujord'hui !");
+ 	        			printf("  Aucune vente aujord'hui !");
 					 }  else
-					 printf("La valeaur maximale des prix est : %d",max(A,NA));
+					 printf("  La valeaur maximale des prix est : %d",max(A,NA));
 					 printf("\n");
  	        		break;
  	        	case 4 :
  	        		if(somme==0) {
- 	        			printf("Aucune vente aujord'hui !");
+ 	        			printf("  Aucune vente aujord'hui !");
 					 }  else
-					 printf("La valeaur minimale des prix est : %d",min(A,NA));
+					 printf("  La valeaur minimale des prix est : %d",min(A,NA));
 					 printf("\n");
  	        		break;
 				case 5 :
  	        		break;
  	        	default :
- 	        		printf("Choix non valid !");
+ 	        		printf("  Choix non valid !");
  	        		break;
 			 }
 			}while(Vente != 5);
@@ -484,7 +488,7 @@ int main(int argc, char *argv[]) {
 		case 0 :
 			break;
 		default :
-			printf("Choix non valid ! ");
+			printf("  Choix non valid ! ");
 	        break;
 		}
  }while(choix!=0);
