@@ -12,7 +12,7 @@ typedef struct{
 	char nom[10];
 	int quant;
 	int prix;
-	int pTTC;
+	float pTTC;
 }Produit;
 typedef struct{
 	Produit p;
@@ -21,29 +21,52 @@ typedef struct{
 
 //Ajouter un produit
 void saisiun(Produit *p,int NP){
+	int code,j;
 	printf("\n\t---Medicament %d---",NP);
-	printf("\n  Nom : ");
+	code :
+	printf("\n  Code : ");
+	scanf("%d",&code);
+	for ( j = 0; j < NP; j++)
+        {
+            if (p[j].code == code)
+            {
+				printf ("  Ce code existe deja essayer de saisir un autre !");
+                goto  code;
+            }
+        }
+    p[NP-1].code = code;
+	printf("  Nom : ");
 	scanf("%s",p[NP-1].nom);
 	printf("  Prix : ");
 	scanf("%d",&p[NP-1].prix);
 	printf("  Quantite : ");
 	scanf("%d",&p[NP-1].quant);
 	p[NP-1].pTTC=p[NP-1].prix +((p[NP-1].prix * 15)/100);
-	p[NP-1].code = NP;
 }
 //Ajouter plusieurs produits
 void saisi(Produit *p,int NP,int tmp){
-	int i;
+	int i,code,j;
 	for(i=tmp;i<NP;i++){
     printf("\n\t---Medicament %d---",i+1);
-	printf("\n  Nom : ");
+    code :
+	printf("\n  Code : ");
+	scanf("%d",&code);
+	for (j = 0; j < NP; j++)
+        {
+            if (p[j].code == code)
+            {
+                printf ("  Ce code existe deja essayer de saisir un autre !");
+                goto  code;
+            }
+        }
+    p[i].code = code;
+	printf("  Nom : ");
 	scanf("%s",p[i].nom);
 	printf("  Prix : ");
 	scanf("%d",&p[i].prix);
 	printf("  Quantite : ");
 	scanf("%d",&p[i].quant);
 	p[i].pTTC=p[i].prix +((p[i].prix * 15)/100);
-    p[i].code = i+1;
     }
 }
 //Tri par prix
@@ -95,6 +118,7 @@ void affichage(Produit *P,int nbr,int T){
      printf("\n  Code : %d",P[i].code);
      printf("\n  Nom : %s",P[i].nom);
 	 printf("\n  Prix : %d DH",P[i].prix);
+	 printf("\n  Prix TTC : %.2f DH",P[i].pTTC);
 	 printf("\n  Quantite : %d",P[i].quant);
 	 printf("\n");
     }
@@ -139,7 +163,7 @@ void Acheter(Produit *P,int nbr,int na,Achat *A,int code,int quantite){
 	printf("\n  Code : %d",A[na-1].p.code);
     printf("\n  Nom : %s",A[na-1].p.nom);
 	printf("\n  Prix : %d DH",A[na-1].p.prix);
-	printf("\n  Prix TTC : %d DH",A[na-1].p.pTTC);
+	printf("\n  Prix TTC : %.2f DH",A[na-1].p.pTTC);
 	printf("\n  Quantite : %d",A[na-1].p.quant);
 	printf("\n  Date d'achat : %d/%d/%d ",A[na-1].d.day,A[na-1].d.mois,A[na-1].d.year);
 	printf("\n");
@@ -155,6 +179,7 @@ void searchcode(Produit *P,int N,int code){
             printf("\n  Code : %d",P[i].code);
             printf("\n  Nom : %s",P[i].nom);
 	        printf("\n  Prix : %d DH",P[i].prix);
+	        printf("\n  Prix TTC : %.2f DH",P[i].pTTC);
 	        printf("\n  Quantite : %d",P[i].quant);
 			}
 			printf("\n");
@@ -174,6 +199,7 @@ void searchquantite(Produit *P,int N,int quant){
             printf("\n  Code : %d",P[i].code);
             printf("\n  Nom : %s",P[i].nom);
 	        printf("\n  Prix : %d DH",P[i].prix);
+	        printf("\n  Prix TTC : %.2f DH",P[i].pTTC);
 	        printf("\n  Quantite : %d",P[i].quant);
             J++;
 			}
@@ -194,6 +220,7 @@ void etatstock(Produit *P,int N){
             printf("\n  Code : %d",P[i].code);
             printf("\n  Nom : %s",P[i].nom);
 	        printf("\n  Prix : %d DH",P[i].prix);
+	        printf("\n  Prix TTC : %.2f DH",P[i].pTTC);
 	        printf("\n  Quantite : %d",P[i].quant);
 	        printf("\n");
             J++;
@@ -221,17 +248,15 @@ void alimenter(Produit *p,int nbr,int quant,int code){
 }
 
 //Suprrimer produit
-void sup(Produit *p,int nbr,int i){
-	int j;
-	   for(j=i;j<nbr;j++) {
-		  p[j]=p[j+1];
-		}
-}
-void suprrimer(Produit *p,int nbr,int code){
+
+int suprrimer(Produit *p,int nbr,int code){
 	int i,j,c=0;
 	for(i=0;i<nbr;i++){
 		if(p[i].code==code){
-          sup(p,nbr,i);
+		  for(j=i;j<nbr;j++) {
+		  p[j]=p[j+1];
+
+		}
           c++;
 		}
 	}
@@ -240,6 +265,7 @@ void suprrimer(Produit *p,int nbr,int code){
 		printf("\n  Code non valid !");
 		printf("\n");
 	}else printf("\n  Done !");
+	return c;
 }
 //Total prix
 int total(Achat *A,int nbr){
@@ -252,7 +278,7 @@ int total(Achat *A,int nbr){
 	 }return somme;
 }
 //Moyenne prix
-int moyenne(Achat *A,int nbr){
+float moyenne(Achat *A,int nbr){
 	 int moyenne,i,somme=0,N=0;
 	 Date d=today();
 	 for(i=0;i<nbr;i++){
@@ -319,25 +345,27 @@ void soumenu3(){
         printf("\n  4 - Valeur minimale des prix des medicaments vendus : ");
         printf("\n  5 - Revenir au menu principale : ");
 }
-//variables de menu
-int choix,Tri,Search,Vente;
-//declaration du tableau du produit
-Produit *p;
-//variable de dimention du tableau du produit
-int NP=0,tmp,nbr;
-//declaration du tableau des achats
-Achat *A;
-//variable de dimention du tableau des achat
-int NA=0;
-//variable de recherche
-int code,quantite,somme;
-
 
 int main(int argc, char *argv[]) {
+	
+	 //variables de menu
+     int choix,Tri,Search,Vente;
+     //declaration du tableau du produit
+     Produit *p;
+     //variable de dimention du tableau du produit
+     int NP=0,tmp,nbr;
+     //declaration du tableau des achats
+     Achat *A;
+     //variable de dimention du tableau des achat
+     int NA=0;
+     //variable de recherche
+     int code,quantite,somme;
+	
+	
 	printf("\n\n");
 	printf("\t>>>>>>Gestion de Pharmacie<<<<<<");
 	printf("\n");
- do  {
+    do  {
  	menu();
 	printf("\n");
  	printf("\n  Votre choix : ");
@@ -353,7 +381,7 @@ int main(int argc, char *argv[]) {
 			saisiun(p,NP);
 			break;
 		case 2 :
-			printf("  Combien de produit vous voulez acheter ? ");
+			printf("  Combien de medicaments vous voulez ajouter ? ");
 			scanf("%d",&nbr);
 			tmp=NP;
 			NP+=nbr;
@@ -386,7 +414,7 @@ int main(int argc, char *argv[]) {
 			}while(Tri!=3);
 			break;
 		case 4 :
-			printf("  Entrer le code du produit que vous voulez acheter : ");
+			printf("  Entrer le code du medicament que vous voulez acheter : ");
 			scanf("%d",&code);
 			printf("  Entrer la quantite : ");
 			scanf("%d",&quantite);
@@ -424,21 +452,23 @@ int main(int argc, char *argv[]) {
 			}while(Search != 3);
 			break;
 		case 6 :
-		    printf("  Les produit dont la quantite inferieure a 3 :");
+		    printf("  Les medicaments dont la quantite inferieure a 3 :");
 			etatstock(p,NP);
 			break;
 		case 7 :
-			printf("  Entrer le code du produit que vous voulez alimenter :");
+			printf("  Entrer le code du medicament que vous voulez alimenter :");
 			scanf("%d",&code);
 			printf("  Entrer la quantite : ");
 			scanf("%d",&quantite);
 			alimenter(p,NP,quantite,code);
 			break;
 		case 8 :
-            printf("  Entrer le code du produit que vous voulez supprimer :");
+            printf("  Entrer le code du medicament que vous voulez supprimer :");
 			scanf("%d",&code);
-			suprrimer(p,NP,code);
-            NP--;
+			int test = suprrimer(p,NP,code);
+			if(test > 0){
+				NP--;
+			}
 			break;
 		case 9 :
             do {
@@ -460,7 +490,7 @@ int main(int argc, char *argv[]) {
 					if(somme==0) {
  	        			printf("  Aucune vente aujord'hui !");
 					 }  else
-					 printf("  La moyenne des prix est : %d",moyenne(A,NA));
+					 printf("  La moyenne des prix est : %.2f",moyenne(A,NA));
 					 printf("\n");
  	        		break;
 				case 3 :
