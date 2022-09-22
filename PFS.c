@@ -175,7 +175,7 @@ void searchcode(Produit *P,int N,int code){
     for(i=0;i<N;i++){
         if(P[i].code == code){
 			C++;
-            printf("\n\t  Medicament Trouver: ");
+            printf("\n\t  Medicament Trouver : ");
             printf("\n  Code : %d",P[i].code);
             printf("\n  Nom : %s",P[i].nom);
 	        printf("\n  Prix : %d DH",P[i].prix);
@@ -206,7 +206,7 @@ void searchquantite(Produit *P,int N,int quant){
 			printf("\n");
     }
     if(C==0){
-        printf("\n  Aucun Medicament ! ");
+        printf("  Aucun Medicament ! ");
 		printf("\n");
     }
 }
@@ -260,7 +260,6 @@ int suprrimer(Produit *p,int nbr,int code){
           c++;
 		}
 	}
-
 	if(c==0){
 		printf("\n  Code non valid !");
 		printf("\n");
